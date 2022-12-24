@@ -1,11 +1,17 @@
 const router = require('express').Router();
 const ShortUrl = require('../models/shortUrl');
+const ShortLogic = require('../shortalgorithm/ShortLogic');
 
 router.post('/', (req, res) => {
-    console.log(req.body);
-    ShortUrl.create(req.body)
-      .then(todo => res.send(todo))
-      .catch(err => res.status(500).send(err));
-  });
+  //full 체크
+  const shortUrl = ShortLogic.short(req.body.full);
+  
+  //shorturl 체크
 
-  module.exports = router;
+  console.log(shortUrl);
+  ShortUrl.create({ full: req.body.full, short: shortUrl })
+    .then((url) => res.send(url))
+    .catch((err) => res.status(500).send(err));
+});
+
+module.exports = router;

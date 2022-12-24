@@ -11,4 +11,12 @@ shortUrlSchema.statics.create = function (payload) {
   return short.save();
 };
 
+shortUrlSchema.statics.findOneByFull = function (full) {
+  return this.findOne({ full });
+};
+
+shortUrlSchema.statics.findOneByFull = function (short) {
+  return this.findOne({ short });
+};
+
 module.exports = mongoose.model('ShortUrl', shortUrlSchema);
