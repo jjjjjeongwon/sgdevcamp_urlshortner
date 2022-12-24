@@ -1,18 +1,14 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const router = express.Router();
+const bodyParser = require('body-parser');
 
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 mongoose
   .connect(
-    'mongodb+srv://jeongwon:rose5612@cluster0.9j6oxxs.mongodb.net/?retryWrites=true&w=majority',
-    {
-      // useNewUrlPaser: true,
-      // useUnifiedTofology: true,
-      // useCreateIndex: true,
-      // useFindAndModify: false,
-    }
+    'mongodb+srv://jeongwon:rose5612@cluster0.9j6oxxs.mongodb.net/?retryWrites=true&w=majority'
   )
   .then(() => console.log('MongoDB connected'))
   .catch((err) => {
@@ -23,13 +19,16 @@ app.listen(8080, function () {
   console.log('Listening on port 8080');
 });
 
-app.use(express.json());
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use('/shorts', require('./routes/short'));
+
 var cors = require('cors');
-const { Short } = require('./models/shortUrl');
-const { userInfo } = require('os');
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, '/build')));
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, '/build/index.html'));
