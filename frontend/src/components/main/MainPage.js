@@ -1,15 +1,31 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const MainTitle = ({ setInputUrl }) => {
+
+  async function postUrl() {
+      await axios.post('http://localhost:8080/shorts', {
+        full: inputRef.current.value,
+      })
+      .then((res) => {
+        console.log(res.data);
+        console.log('전체',res);
+      })
+      .catch((e) => {
+        console.log("연결 오류", e);
+      })
+  }
+
   const inputRef = useRef();
   const navigate = useNavigate();
 
   const onSubmitUrl = () => {
     setInputUrl(inputRef.current.value);
     console.log(inputRef.current.value);
-    navigate('/result');
+    postUrl();
+    // navigate('/result');
   };
   
   return (
