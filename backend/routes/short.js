@@ -3,15 +3,28 @@ const ShortUrl = require('../models/shortUrl');
 const ShortLogic = require('../shortalgorithm/ShortLogic');
 
 router.post('/', (req, res) => {
-  //full 체크
-  const shortUrl = ShortLogic.short(req.body.full);
-  
-  //shorturl 체크
+  ShortUrl.findOneByFull(req.body.full)
+    .then((full) => {
+      if (!full) return ShortUrlCheck(req, res);
+      res.send(full);
+    })
+    .catch((err) => res.status(500).send(err));
+});
 
-  console.log(shortUrl);
+function createShortUrl(req, res, shortUrl) {
   ShortUrl.create({ full: req.body.full, short: shortUrl })
     .then((url) => res.send(url))
     .catch((err) => res.status(500).send(err));
-});
+}
+
+function ShortUrlCheck(req, res) {
+  const shortUrl = ShortLogic.short(req.body.full);
+  ShortUrl.findOneByShort(shortUrl)
+    .then((short) => {
+      if (!short) return createShortUrl(req, res, shortUrl);
+      return ShortUrlCheck(req, res);
+    })
+    .catch((err) => res.status(500).send(err));
+}
 
 module.exports = router;

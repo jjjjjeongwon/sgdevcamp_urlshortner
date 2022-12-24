@@ -15,7 +15,7 @@ shortUrlSchema.statics.findOneByFull = function (full) {
   return this.findOne({ full });
 };
 
-shortUrlSchema.statics.findOneByFull = function (short) {
+shortUrlSchema.statics.findOneByShort = function (short) {
   return this.findOne({ short });
 };
 
