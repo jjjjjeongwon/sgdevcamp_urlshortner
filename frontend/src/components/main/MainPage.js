@@ -22,6 +22,7 @@ const MainTitle = ({ setFull, setShort }) => {
       })
       .catch((e) => {
         console.log("연결 오류", e);
+        alert('단축할 url을 입력해주세요!');
       })
   }
 
