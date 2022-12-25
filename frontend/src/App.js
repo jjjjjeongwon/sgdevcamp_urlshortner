@@ -14,9 +14,15 @@ function App() {
   return (
     <Container>
       <Routes>
-        <Route path="/" element={<MainPage setFull={setFull} setShort={setShort} />} />
-        <Route path="/:shortUrl" element={<RedirectPage/>} />
-        <Route path="/result" element={<ResultPage full={full} short = {short} />} />
+        <Route
+          path="/"
+          element={<MainPage setFull={setFull} setShort={setShort} />}
+        />
+        <Route path="/:shortUrl" element={<RedirectPage />} />
+        <Route
+          path="/result"
+          element={<ResultPage full={full} short={short} />}
+        />
       </Routes>
     </Container>
   );
