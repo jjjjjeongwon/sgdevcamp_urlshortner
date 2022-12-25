@@ -1,22 +1,34 @@
-import React from 'react';
 import styled from 'styled-components';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const ResultPage = ({ inputUrl }) => {
+const ResultPage = ({ full, short }) => {
+  const navigate = useNavigate();
+
   const clipboardCopy = async () => {
-    await navigator.clipboard.writeText(inputUrl);
+    await navigator.clipboard.writeText(`http://localhost:8080/${short}`);
     alert('url 복사 완료!');
   };
+
+  useEffect(() => {
+    if (!full || !short) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <Container>
       <Title>Title</Title>
       <ResultBox>
         <BoxTitle>Original URL</BoxTitle>
-        <OriginalBox value={inputUrl} readOnly={true}></OriginalBox>
+        <OriginalBox value={full} readOnly={true}></OriginalBox>
 
         <BoxTitle>Shorten URL</BoxTitle>
         <ShortenContainer>
-          <ShortenBox value={inputUrl} readOnly={true}></ShortenBox>
+          <ShortenBox
+            value={'http://localhost:8080/' + short}
+            readOnly={true}
+          ></ShortenBox>
           <CopyButton onClick={clipboardCopy}>COPY</CopyButton>
         </ShortenContainer>
       </ResultBox>

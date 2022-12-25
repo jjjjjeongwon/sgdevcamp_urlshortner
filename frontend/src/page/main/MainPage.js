@@ -1,9 +1,13 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const MainTitle = ({ setInputUrl }) => {
+const MainTitle = ({ setFull, setShort }) => {
+
+  const inputRef = useRef();
+  const navigate = useNavigate();
+
 
   async function postUrl() {
       await axios.post('http://localhost:8080/shorts', {
@@ -12,20 +16,19 @@ const MainTitle = ({ setInputUrl }) => {
       .then((res) => {
         console.log(res.data);
         console.log('전체',res);
+        setFull(res.data.full);
+        setShort(res.data.short);
+    navigate('/result');
       })
       .catch((e) => {
         console.log("연결 오류", e);
+        alert('단축할 url을 입력해주세요!');
       })
   }
 
-  const inputRef = useRef();
-  const navigate = useNavigate();
-
   const onSubmitUrl = () => {
-    setInputUrl(inputRef.current.value);
     console.log(inputRef.current.value);
     postUrl();
-    // navigate('/result');
   };
   
   return (
