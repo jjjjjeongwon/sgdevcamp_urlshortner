@@ -3,19 +3,18 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ResultPage = ({ full, short }) => {
-
   const navigate = useNavigate();
 
   const clipboardCopy = async () => {
-    await navigator.clipboard.writeText(short);
+    await navigator.clipboard.writeText(`http://localhost:8080/${short}`);
     alert('url 복사 완료!');
   };
 
   useEffect(() => {
-    if(!full||!short){
+    if (!full || !short) {
       navigate('/');
     }
-  },[]);
+  }, []);
 
   return (
     <Container>
@@ -26,7 +25,10 @@ const ResultPage = ({ full, short }) => {
 
         <BoxTitle>Shorten URL</BoxTitle>
         <ShortenContainer>
-          <ShortenBox value={short} readOnly={true}></ShortenBox>
+          <ShortenBox
+            value={'http://localhost:8080/' + short}
+            readOnly={true}
+          ></ShortenBox>
           <CopyButton onClick={clipboardCopy}>COPY</CopyButton>
         </ShortenContainer>
       </ResultBox>
