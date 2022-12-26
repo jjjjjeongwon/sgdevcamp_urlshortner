@@ -9,6 +9,7 @@
 URL 입력폼에 URL을 입력하면 단축 후 결과를 출력하는 서비스
 ## 🛠 Architecture
 <img src="./frontend/images/Architecture.png"/>
+
 ## 📚 Tech Stack 
 <div align=center> 
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
