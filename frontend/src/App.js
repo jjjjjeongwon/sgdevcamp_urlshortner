@@ -6,6 +6,7 @@ import { useState } from 'react';
 import MainPage from './page/main/MainPage';
 import ResultPage from './page/result/ResultPage';
 import RedirectPage from './page/redirect/RedirectPage';
+import ErrorPage from './page/error/ErrorPage';
 
 function App() {
   const [full, setFull] = useState();
@@ -23,6 +24,7 @@ function App() {
           path="/result"
           element={<ResultPage full={full} short={short} />}
         />
+        <Route path="/error" element={<ErrorPage />} />
       </Routes>
     </Container>
   );

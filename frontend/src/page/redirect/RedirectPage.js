@@ -15,8 +15,7 @@ const RedirectPage = () => {
       })
       .catch((e) => {
         console.log('일치하는 url 없음', e);
-        alert('일치하는 url이 없습니다.');
-        return navigate('/');
+        return navigate('/error');
       });
   }
   getShortUrl();
