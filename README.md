@@ -1,8 +1,6 @@
 # 🔎 개인 프로젝트_URL Shortner
 ## 프로젝트 개요
 URL 입력폼에 URL을 입력하면 단축 후 결과를 출력하는 서비스
-## 🛠 Architecture
-<img src="./frontend/images/Architecture.png"/>
 
 ## 📚 Tech Stack 
 <div align=center> 
@@ -15,6 +13,10 @@ URL 입력폼에 URL을 입력하면 단축 후 결과를 출력하는 서비스
   <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
   <img src="https://img.shields.io/badge/mongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white">
 </div>
+
+## 🛠 Architecture
+<img src="./frontend/images/Architecture.png"/>
+
 
 ## 와이어프레임 초안 
 <img src="./images/urlShortner_wireframe.png "/>
